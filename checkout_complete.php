@@ -750,33 +750,33 @@ $total_unread = $unread_messages + $unread_notifications;
             }
         }
         
-        function loadNotifications() {
-            fetch('get_notifications.php')
-                .then(response => response.json())
-                .then(data => {
-                    const container = document.getElementById('notificationList');
-                    if (data.notifications && data.notifications.length === 0) {
-                        container.innerHTML = '<div class="empty-notifications">No new notifications</div>';
-                        return;
-                    }
-                    
-                    let html = '';
-                    data.notifications.forEach(notif => {
-                        html += `
-                            <a href="${notif.link}" class="notification-item ${notif.is_read == 0 ? 'unread' : ''}">
-                                <div class="notification-title">${notif.title}</div>
-                                <div class="notification-message">${notif.message}</div>
-                                <div class="notification-time">${notif.time_ago}</div>
-                            </a>
-                        `;
-                    });
-                    container.innerHTML = html;
-                })
-                .catch(error => {
-                    console.error('Error loading notifications:', error);
-                    document.getElementById('notificationList').innerHTML = '<div class="empty-notifications">Unable to load notifications</div>';
-                });
-        }
+      function loadNotifications() {
+    fetch('get_notification.php')
+        .then(response => response.json())
+        .then(data => {
+            const container = document.getElementById('notificationList');
+            if (!data.notifications || data.notifications.length === 0) {
+                container.innerHTML = '<div class="empty-notifications">No new notifications</div>';
+                return;
+            }
+            
+            let html = '';
+            data.notifications.forEach(notif => {
+                html += `
+                    <a href="${notif.link}" class="notification-item ${notif.is_read == 0 ? 'unread' : ''}">
+                        <div class="notification-title">${notif.title}</div>
+                        <div class="notification-message">${notif.message}</div>
+                        <div class="notification-time">${notif.time_ago}</div>
+                    </a>
+                `;
+            });
+            container.innerHTML = html;
+        })
+        .catch(error => {
+            console.error('Error loading notifications:', error);
+            document.getElementById('notificationList').innerHTML = '<div class="empty-notifications">Unable to load notifications</div>';
+        });
+}
         
         // Close dropdown when clicking outside
         document.addEventListener('click', function() {

@@ -119,6 +119,27 @@ $submitted = isset($_GET['submitted']) && $_GET['submitted'] == 'success';
             background: var(--red-dark);
         }
 
+        /* Contact Admin Link Style */
+        .nav-contact {
+            color: var(--red) !important;
+            font-weight: 600;
+            position: relative;
+        }
+
+        .nav-contact:hover {
+            color: var(--red-dark) !important;
+        }
+
+        .nav-contact::after {
+            content: '●';
+            font-size: 0.4rem;
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--red);
+        }
+
         /* Notification Icon Styles */
         .notification-icon {
             position: relative;
@@ -505,7 +526,7 @@ $submitted = isset($_GET['submitted']) && $_GET['submitted'] == 'success';
                 <a href="marketplace.php" class="active">Gallery</a>
                 <?php if(isset($_SESSION['user_id'])): ?>
                     <?php if($_SESSION['role'] == 'seller'): ?>
-                        <a href="seller/my_atelier.php">Sell Items</a>
+                        <a href="seller/my_atelier.php">My Atelier</a>
                     <?php elseif($_SESSION['role'] == 'admin'): ?>
                         <a href="admin/dashboard.php">Dashboard</a>
                     <?php else: ?>
@@ -518,6 +539,11 @@ $submitted = isset($_GET['submitted']) && $_GET['submitted'] == 'success';
                     $unread_notifications = getUnreadNotificationCount($conn, $_SESSION['user_id']);
                     $total_unread = $unread_messages + $unread_notifications;
                     ?>
+                    
+                    <a href="messages.php">Messages</a>
+                    
+                    <!-- Contact Admin Link -->
+                    <a href="contact_admin.php" class="nav-contact">📧 Contact Admin</a>
                     
                     <div class="notification-icon" onclick="toggleNotifications(event)">
                         <span>🔔</span>
@@ -538,7 +564,6 @@ $submitted = isset($_GET['submitted']) && $_GET['submitted'] == 'success';
                         </div>
                     </div>
                     
-                    <a href="messages.php">Messages</a>
                     <a href="logout.php">Logout</a>
                     <span style="color: var(--red); font-size: 0.8rem;">Welcome, <?php echo $_SESSION['full_name']; ?></span>
                 <?php else: ?>
@@ -681,33 +706,33 @@ $submitted = isset($_GET['submitted']) && $_GET['submitted'] == 'success';
         }
     }
     
-    function loadNotifications() {
-        fetch('get_notifications.php')
-            .then(response => response.json())
-            .then(data => {
-                const container = document.getElementById('notificationList');
-                if (data.notifications && data.notifications.length === 0) {
-                    container.innerHTML = '<div class="empty-notifications">No new notifications</div>';
-                    return;
-                }
-                
-                let html = '';
-                data.notifications.forEach(notif => {
-                    html += `
-                        <a href="${notif.link}" class="notification-item ${notif.is_read == 0 ? 'unread' : ''}">
-                            <div class="notification-title">${notif.title}</div>
-                            <div class="notification-message">${notif.message}</div>
-                            <div class="notification-time">${notif.time_ago}</div>
-                        </a>
-                    `;
-                });
-                container.innerHTML = html;
-            })
-            .catch(error => {
-                console.error('Error loading notifications:', error);
-                document.getElementById('notificationList').innerHTML = '<div class="empty-notifications">Unable to load notifications</div>';
+function loadNotifications() {
+    fetch('get_notification.php')
+        .then(response => response.json())
+        .then(data => {
+            const container = document.getElementById('notificationList');
+            if (!data.notifications || data.notifications.length === 0) {
+                container.innerHTML = '<div class="empty-notifications">No new notifications</div>';
+                return;
+            }
+            
+            let html = '';
+            data.notifications.forEach(notif => {
+                html += `
+                    <a href="${notif.link}" class="notification-item ${notif.is_read == 0 ? 'unread' : ''}">
+                        <div class="notification-title">${notif.title}</div>
+                        <div class="notification-message">${notif.message}</div>
+                        <div class="notification-time">${notif.time_ago}</div>
+                    </a>
+                `;
             });
-    }
+            container.innerHTML = html;
+        })
+        .catch(error => {
+            console.error('Error loading notifications:', error);
+            document.getElementById('notificationList').innerHTML = '<div class="empty-notifications">Unable to load notifications</div>';
+        });
+}
     
     // Close dropdown when clicking outside
     document.addEventListener('click', function() {

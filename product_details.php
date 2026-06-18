@@ -681,6 +681,8 @@ if(isset($_SESSION['user_id'])){
                     <?php endif; ?>
                     
                     <a href="messages.php">Messages</a>
+                     <!-- Contact Admin Link -->
+                    <a href="contact_admin.php" class="nav-contact">📧 Contact Admin</a>
                     <a href="logout.php">Logout</a>
                     <span style="color: var(--red); font-size: 0.8rem;">Welcome, <?php echo $_SESSION['full_name']; ?></span>
                 <?php else: ?>
@@ -892,33 +894,33 @@ if(isset($_SESSION['user_id'])){
             }
         }
         
-        function loadNotifications() {
-            fetch('get_notifications.php')
-                .then(response => response.json())
-                .then(data => {
-                    const container = document.getElementById('notificationList');
-                    if (data.notifications && data.notifications.length === 0) {
-                        container.innerHTML = '<div class="empty-notifications">No new notifications</div>';
-                        return;
-                    }
-                    
-                    let html = '';
-                    data.notifications.forEach(notif => {
-                        html += `
-                            <a href="${notif.link}" class="notification-item ${notif.is_read == 0 ? 'unread' : ''}">
-                                <div class="notification-title">${notif.title}</div>
-                                <div class="notification-message">${notif.message}</div>
-                                <div class="notification-time">${notif.time_ago}</div>
-                            </a>
-                        `;
-                    });
-                    container.innerHTML = html;
-                })
-                .catch(error => {
-                    console.error('Error loading notifications:', error);
-                    document.getElementById('notificationList').innerHTML = '<div class="empty-notifications">Unable to load notifications</div>';
-                });
-        }
+    function loadNotifications() {
+    fetch('get_notification.php')
+        .then(response => response.json())
+        .then(data => {
+            const container = document.getElementById('notificationList');
+            if (!data.notifications || data.notifications.length === 0) {
+                container.innerHTML = '<div class="empty-notifications">No new notifications</div>';
+                return;
+            }
+            
+            let html = '';
+            data.notifications.forEach(notif => {
+                html += `
+                    <a href="${notif.link}" class="notification-item ${notif.is_read == 0 ? 'unread' : ''}">
+                        <div class="notification-title">${notif.title}</div>
+                        <div class="notification-message">${notif.message}</div>
+                        <div class="notification-time">${notif.time_ago}</div>
+                    </a>
+                `;
+            });
+            container.innerHTML = html;
+        })
+        .catch(error => {
+            console.error('Error loading notifications:', error);
+            document.getElementById('notificationList').innerHTML = '<div class="empty-notifications">Unable to load notifications</div>';
+        });
+}
         
         // Close dropdown when clicking outside
         document.addEventListener('click', function() {

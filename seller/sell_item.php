@@ -180,6 +180,8 @@ if(isset($_POST['publish'])){
             <div class="nav-links">
                 <a href="../marketplace.php">Gallery</a>
                 <a href="my_atelier.php">Dashboard</a>
+                 <!-- Contact Admin Link -->
+                    <a href="contact_admin.php" class="nav-contact">📧 Contact Admin</a>
                 <a href="../logout.php">Logout</a>
             </div>
         </div>

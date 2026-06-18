@@ -76,7 +76,7 @@ $total_unread = $unread_messages + $unread_notifications;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Messages - Pastimes Atelier</title>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
+   <style>
         :root {
             --red: #c44536;
             --red-dark: #a33a2c;
@@ -489,6 +489,9 @@ $total_unread = $unread_messages + $unread_notifications;
                     <?php else: ?>
                         <a href="cart.php">Cart</a>
                     <?php endif; ?>
+
+                     <!-- Contact Admin Link -->
+                    <a href="contact_admin.php" class="nav-contact">📧 Contact Admin</a>
                     
                     <div class="notification-icon" onclick="toggleNotifications(event)">
                         <span>🔔</span>
@@ -582,33 +585,33 @@ $total_unread = $unread_messages + $unread_notifications;
             }
         }
         
-        function loadNotifications() {
-            fetch('get_notifications.php')
-                .then(response => response.json())
-                .then(data => {
-                    const container = document.getElementById('notificationList');
-                    if (data.notifications && data.notifications.length === 0) {
-                        container.innerHTML = '<div class="empty-notifications">No new notifications</div>';
-                        return;
-                    }
-                    
-                    let html = '';
-                    data.notifications.forEach(notif => {
-                        html += `
-                            <a href="${notif.link}" class="notification-item ${notif.is_read == 0 ? 'unread' : ''}">
-                                <div class="notification-title">${notif.title}</div>
-                                <div class="notification-message">${notif.message}</div>
-                                <div class="notification-time">${notif.time_ago}</div>
-                            </a>
-                        `;
-                    });
-                    container.innerHTML = html;
-                })
-                .catch(error => {
-                    console.error('Error loading notifications:', error);
-                    document.getElementById('notificationList').innerHTML = '<div class="empty-notifications">Unable to load notifications</div>';
-                });
-        }
+function loadNotifications() {
+    fetch('get_notifications.php')
+        .then(response => response.json())
+        .then(data => {
+            const container = document.getElementById('notificationList');
+            if (!data.notifications || data.notifications.length === 0) {
+                container.innerHTML = '<div class="empty-notifications">No new notifications</div>';
+                return;
+            }
+            
+            let html = '';
+            data.notifications.forEach(notif => {
+                html += `
+                    <a href="${notif.link}" class="notification-item ${notif.is_read == 0 ? 'unread' : ''}">
+                        <div class="notification-title">${notif.title}</div>
+                        <div class="notification-message">${notif.message}</div>
+                        <div class="notification-time">${notif.time_ago}</div>
+                    </a>
+                `;
+            });
+            container.innerHTML = html;
+        })
+        .catch(error => {
+            console.error('Error loading notifications:', error);
+            document.getElementById('notificationList').innerHTML = '<div class="empty-notifications">Unable to load notifications</div>';
+        });
+}
         
         // Close dropdown when clicking outside
         document.addEventListener('click', function() {
