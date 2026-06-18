@@ -1,11 +1,14 @@
 Pastimes Digital Atelier - README
 <p align="center"> <img src="read1.png" alt="Pastimes Digital Atelier Hero" width="100%"> </p>
 📖 Overview
+
 Pastimes Digital Atelier is a curated heritage fashion marketplace platform where users can buy, sell, and discover vintage and pre-loved clothing items. The platform connects buyers with sellers, features an admin panel for moderation, and includes a complete messaging and notification system.
 
 <p align="center"> <img src="read1.1.png" alt="New Arrivals Section" width="100%"> </p>
 🚀 Features
+
 👤 User Features
+
 User Registration & Login - Secure registration with password hashing and email verification
 
 Role-Based Access - Three user roles: Buyer, Seller, and Admin
@@ -14,6 +17,7 @@ Profile Management - Users can update their profile information
 
 <p align="center"> <img src="read2.png" alt="Registration Page" width="45%"> <img src="read3.png" alt="Login Page" width="45%"> </p>
 🛍️ Buyer Features
+
 Browse Gallery - View approved clothing items with filters (brand, sustainability score, price range, condition)
 
 Product Details - View detailed product information with images
@@ -24,6 +28,7 @@ Checkout Process - Complete purchases with shipping address and payment method
 
 <p align="center"> <img src="read4.png" alt="Gallery Page" width="45%"> <img src="read5.png" alt="Shopping Cart" width="45%"> </p>
 📦 Seller Features
+
 Create Listings - Upload items with title, description, price, brand, size, condition, and images
 
 Image Upload - Drag-and-drop image upload with preview
@@ -34,6 +39,7 @@ AI Suggestions - Automated suggestions for titles and valuations (demo feature)
 
 <p align="center"> <img src="read6.png" alt="Cart Summary" width="100%"> </p>
 💬 Messaging System
+
 User-to-User Messaging - Buyers can message sellers about products
 
 Admin Communication - Users can contact admin via dedicated page
@@ -46,6 +52,7 @@ Conversation Threads - Full chat history between users
 
 <p align="center"> <img src="read7.png" alt="Messages Inbox" width="100%"> </p>
 👑 Admin Features
+
 Admin Dashboard - Overview of sales, users, listings, and system status
 
 User Management - Verify, edit, and delete user accounts
@@ -58,6 +65,7 @@ Content Moderation - Ensure quality and authenticity of listings
 
 <p align="center"> <img src="read8.png" alt="Admin Dashboard" width="100%"> </p><p align="center"> <img src="read8.1.png" alt="Admin Dashboard Stats" width="100%"> </p>
 🔔 Notification System
+
 Real-time Notifications - Instant notifications for messages, approvals, and system events
 
 Unread Badge - Visual indicator for unread messages and notifications
@@ -65,6 +73,7 @@ Unread Badge - Visual indicator for unread messages and notifications
 Notification Dropdown - Quick view of recent notifications
 
 🎨 Design Features
+
 Responsive Design - Works on desktop, tablet, and mobile devices
 
 Elegant Aesthetic - Heritage-inspired design with red accent color
@@ -74,6 +83,7 @@ Typography - Cormorant Garamond and Inter fonts
 Consistent UI - Unified design across all pages
 
 🗂️ Database Structure
+
 Tables
 Table	Description
 tblUser	User accounts (buyers, sellers, admins)
@@ -101,6 +111,7 @@ tblConversations.user1_id → tblUser.user_id
 tblConversations.user2_id → tblUser.user_id
 
 🛠️ Installation Guide
+
 Prerequisites
 XAMPP (Apache, MySQL, PHP) or similar web server
 
@@ -179,7 +190,9 @@ Open your browser and go to:
 
 text
 http://localhost/ClothingStore/
+
 🔑 Demo Credentials
+
 Admin Account
 Field	Value
 Email	admin@pastimes.com
@@ -192,7 +205,9 @@ Buyer Account
 Field	Value
 Email	john@example.com
 Password	admin123
+
 📁 File Structure
+
 text
 ClothingStore/
 ├── admin/
@@ -233,40 +248,59 @@ ClothingStore/
 ├── loadClothingStore.php       # Setup database
 ├── userData.txt                # Sample user data
 └── myClothingStore.sql         # Full database export
+
 📸 Page Screenshots
+
 Landing Page
 <p align="center"> <img src="read1.png" alt="Landing Page" width="100%"> </p>
 New Arrivals Section
+
 <p align="center"> <img src="read1.1.png" alt="New Arrivals" width="100%"> </p>
 Registration Page
+
 <p align="center"> <img src="read2.png" alt="Registration" width="60%"> </p>
 Login Page
+
 <p align="center"> <img src="read3.png" alt="Login" width="60%"> </p>
 Gallery / Marketplace
+
 <p align="center"> <img src="read4.png" alt="Gallery" width="100%"> </p>
 Shopping Cart
+
 <p align="center"> <img src="read5.png" alt="Cart" width="100%"> </p>
 Cart Summary
+
 <p align="center"> <img src="read6.png" alt="Cart Summary" width="100%"> </p>
 Messages Inbox
+
 <p align="center"> <img src="read7.png" alt="Messages" width="100%"> </p>
 Admin Dashboard
+
 <p align="center"> <img src="read8.png" alt="Admin Dashboard" width="100%"> </p>
 Admin Dashboard Stats
+
 <p align="center"> <img src="read8.1.png" alt="Admin Dashboard Stats" width="100%"> </p>
 Admin User Management
+
 <p align="center"> <img src="read9.png" alt="User Management" width="100%"> </p>
 Edit User
+
 <p align="center"> <img src="read10.png" alt="Edit User" width="100%"> </p>
 Edit User - Extended
+
 <p align="center"> <img src="read10.1.png" alt="Edit User Extended" width="60%"> </p>
 Seller Verification Queue
+
 <p align="center"> <img src="read11.png" alt="Seller Verification" width="100%"> </p>
 Listing Approval Queue
+
 <p align="center"> <img src="read12.png" alt="Listing Approval" width="100%"> </p>
 Admin Messages
+
 <p align="center"> <img src="read13.png" alt="Admin Messages" width="100%"> </p>
+
 🧪 Testing
+
 Test Flows
 Buyer Flow
 Register as Buyer → Login → Browse Gallery → View Product → Add to Cart → Checkout → Order Complete
@@ -283,6 +317,7 @@ get_notifications.php - Returns JSON array of unread notifications
 get_notification_count.php - Returns JSON with total unread count
 
 🎨 Design Guidelines
+
 Color Palette
 Color	Hex Code	Usage
 Red Accent	#c44536	Buttons, links, badges, highlights
@@ -293,7 +328,9 @@ Typography
 Font	Usage
 Cormorant Garamond	Headings, logos, product titles
 Inter	Body text, buttons, form inputs
+
 🐛 Troubleshooting
+
 Common Issues
 "Connection failed" error
 Make sure XAMPP MySQL is running
@@ -323,6 +360,7 @@ Ensure conversations are created in tblConversations
 Run the SQL query to create conversations from existing messages
 
 📝 Dependencies
+
 PHP 7.4+
 
 MySQL 5.7+
@@ -332,13 +370,16 @@ XAMPP/Apache
 Google Fonts - Cormorant Garamond, Inter
 
 👨‍💻 Author
+
 Pastimes Digital Atelier Development Team
 
 
 📞 Support
+
 For support, please contact the administrator via the "Contact Admin" page in the application.
 
 ✨ Future Enhancements
+
 Payment gateway integration (Stripe/PayPal)
 
 Email notifications
